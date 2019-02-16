@@ -6,6 +6,9 @@
     number gets added to the array which will be printed at the end
   */
   function prime_function($input){
+    if(!(is_int($input))){
+      throw new Exception('Invalid input! Must be integer');
+    }
     $primeNums = array();
     for($i = 1; $i <= $input; $i++){
       if(check_if_prime($i) == TRUE){
@@ -22,7 +25,6 @@
     1 = not prime, 2 = prime, 3 = prime
     If a number is even, it is not prime.
     If input % any number uptil it == 0, then it is not prime.
-
   */
   function check_if_prime($num){
     if($num == 1){
@@ -57,16 +59,22 @@
   */
   function tester_function(){
     echo("Output for parameter = 10: ");
-    echo("\n");
+    echo("<br>");
+    echo("\n"); // Used for when running on terminal
     prime_function(10);
+    echo("<br>");
 
-    echo("Output for parameter = 0");
-    echo("\n");
+    echo("Output for parameter = 0: ");
+    echo("<br>");
+    echo("\n"); // Used for when running on terminal
     prime_function(0);
+    echo("<br>");
 
-    echo("Output for parameter = 100");
-    echo("\n");
+    echo("Output for parameter = 100: ");
+    echo("<br>");
+    echo("\n"); // Used for when running on terminal
     prime_function(100);
+    echo("<br>");
 
     /*
       Checking the outputs for nums 1 - 99
