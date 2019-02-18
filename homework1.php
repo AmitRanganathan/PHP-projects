@@ -1,4 +1,3 @@
-
 <?php
   /*
     Main function which takes in the parameter passed in from the tesster_function
@@ -39,7 +38,6 @@
     elseif($num % 2 == 0){
       return FALSE;
     }
-
     $counter = 0;
     for($i = 2; $i < $num; $i++){
       if ($num % $i == 0){
@@ -47,11 +45,8 @@
       }
     }
     return TRUE;
-
   }
  ?>
-
-
 
 <?php
   /*
