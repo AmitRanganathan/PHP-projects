@@ -6,7 +6,10 @@
   */
   function prime_function($input){
     if(!(is_int($input))){
-      throw new Exception('Invalid input! Must be integer');
+      throw new Exception('Invalid input! Must be a positive integer');
+    }
+    elseif($input < 0){
+      throw new Exception('Invalid input! Must be a positive integer')
     }
     $primeNums = array();
     for($i = 1; $i <= $input; $i++){
