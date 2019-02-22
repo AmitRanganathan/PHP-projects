@@ -18,16 +18,38 @@ function validate_input($input){
 }
 
 function convert_to_numeral($decoder, $romanString){
-
-  $answer = null;
-  validate_input($romanString);
+  $answer = null; // Will contain the converted numeral
+  validate_input($romanString); // make sure input is of valid type
+  // if the roman numeral is in the array, just print the value for the key
   if (array_key_exists($romanString, $decoder)) {
     $answer = $decoder[$romanString];
+  }else{
+    // Check if the current index's value in $decoder is GTE to the next
+    // indexes value.  If it is, simply add value to the $answer.  If it is not,
+    // subtract the greater value from the smaller and add to $answer, incremnt $i
+    // here since we are already taking into consideration the $i + 1 position.
+    for ($i = 0; $i < strlen($romanString); $i++){
+      $curValue = $decoder[$romanString[$i]];
+      if($i + 1 < strlen($romanString)){
+        $nextValue = $decoder[$romanString[$i+1]];
+        if($curValue >= $nextValue){
+          $answer += $curValue;
+        }else{
+          $answer += ($nextValue - $curValue);
+          $i++;
+        }
+      }else{
+        $answer += $curValue;
+      }
+    }
   }
-
+  // print the answer
+  echo($romanString);
+  echo(": ");
   echo($answer);
   echo('<br>');
 }
+
  ?>
 
 
@@ -50,6 +72,8 @@ Tester function to test the functionality of the methods above.
 */
 function tester($decoder){
    // Test all the basic roman numerals that are in the array
+   echo("BASIC ROMAN NUMERALS!");
+   echo("<br>");
    try{
      convert_to_numeral($decoder, 'I');
      convert_to_numeral($decoder,'V');
@@ -62,10 +86,38 @@ function tester($decoder){
      echo 'Caught exception: ', $e->getMessage(), "\n";
    }
 
+   // Test combinations of roman numerals
+   echo("<br>");
+   echo("VARIOUS COMBINATIONS!");
+   echo("<br>");
+   try{
+     convert_to_numeral($decoder, 'II');
+     convert_to_numeral($decoder, 'III');
+     convert_to_numeral($decoder, 'IV');
+     convert_to_numeral($decoder, 'VI');
+     convert_to_numeral($decoder, 'VII');
+     convert_to_numeral($decoder, 'IX');
+     convert_to_numeral($decoder, 'XI');
+     convert_to_numeral($decoder, 'XII');
+     convert_to_numeral($decoder, 'XIII');
+     convert_to_numeral($decoder, 'XIV');
+     convert_to_numeral($decoder, 'XV');
+     convert_to_numeral($decoder, 'XVI');
+     convert_to_numeral($decoder, 'XVII');
+     convert_to_numeral($decoder, 'XVIII');
+     convert_to_numeral($decoder, 'XIX');
+     convert_to_numeral($decoder, 'XX');
 
+
+   }catch(Exception $e){
+     echo 'Caught exception: ', $e->getMessage(), "\n";
+   }
 
 
    // Test invalid inputs
+   echo("<br>");
+   echo("INVALID INPUTS!");
+   echo("<br>");
    try{
      convert_to_numeral($decoder,3);
      convert_to_numeral($decoder,4.56);
