@@ -13,8 +13,18 @@ do the conversion.
 
 function validate_input($input)
 {
+    // If the input is not a string, throw error
     if (!(is_string($input))) {
-        throw new Exception("Input must be a string representing a Roman Numeral.");
+      throw new Exception("Input must be a string representing a Roman Numeral.");
+    }
+    // If the string does not contain ONLY alphabetical values, throw error
+    elseif(!(ctype_alpha($input))) {
+      throw new Exception("Input must be a string representing a Roman Numeral.");
+    }
+
+    // This ensures that input can only be a roman numeral
+    elseif(preg_match("/[^IVXLCDM]+/", $input)){
+      throw new Exception("Input must be a string representing a Roman Numeral.");
     }
 }
 
@@ -110,6 +120,7 @@ function tester($decoder)
         convert_to_numeral($decoder, 'XVIII');
         convert_to_numeral($decoder, 'XIX');
         convert_to_numeral($decoder, 'XX');
+        convert_to_numeral($decoder, 'MCMXC');
     } catch (Exception $e) {
         echo 'Caught exception: ', $e->getMessage(), "\n";
     }
@@ -119,6 +130,7 @@ function tester($decoder)
     echo("INVALID INPUTS!");
     echo("<br>");
     try {
+        convert_to_numeral($decoder, '3');
         convert_to_numeral($decoder, 3);
         convert_to_numeral($decoder, 4.56);
     } catch (Exception $e) {
