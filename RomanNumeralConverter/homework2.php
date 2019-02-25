@@ -30,7 +30,7 @@ function validate_input($input)
 
 function convert_to_numeral($decoder, $romanString)
 {
-    $answer = null; // Will contain the converted numeral
+  $answer = null; // Will contain the converted numeral
   validate_input($romanString); // make sure input is of valid type
   // if the roman numeral is in the array, just print the value for the key
   if (array_key_exists($romanString, $decoder)) {
